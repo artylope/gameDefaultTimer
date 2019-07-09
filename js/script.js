@@ -1,6 +1,9 @@
 const gameIntroScreen = document.querySelector('#game-intro');
 const inGameScreen    = document.querySelector('#in-game');
 const gameEndScreen   = document.querySelector('#game-end');
+const game321Screen   = document.querySelector('#game-321');
+
+const starter   = document.querySelector('#starter');
 
 const timebar  = document.querySelector('#timebar');
 const time            = 10; //in seconds
@@ -15,21 +18,48 @@ var returnIntro = function(){
   gameIntroScreen.style.visibility = 'visible';
   inGameScreen.style.visibility = 'hidden';
   gameEndScreen.style.visibility = 'hidden';
+  game321Screen.style.visibility = 'hidden';
 }
 
 
 var startGame = function(){
   //reset timer
-  console.clear();
-  timeLeft = time;
-
   console.log('start game');
   gameIntroScreen.style.visibility = 'hidden';
   inGameScreen.style.visibility = 'visible';
   gameEndScreen.style.visibility = 'hidden';
+  game321Screen.style.visibility = 'hidden';
 
   gameRunning = true;
+  console.clear();
+  timeLeft = time;
   startTimer();
+}
+
+
+var start321 = function(){
+  var counter = 3;
+  starter.innerText = counter;
+
+  gameIntroScreen.style.visibility = 'hidden';
+  inGameScreen.style.visibility = 'hidden';
+  gameEndScreen.style.visibility = 'hidden';
+  game321Screen.style.visibility = 'visible';
+
+  var display321 = setInterval(
+    function(){
+      counter = counter - 1;
+      starter.innerText = counter;
+      if(counter === 0){
+        starter.innerText = "Go!";
+      }
+    }
+  , 1000);
+
+  setTimeout(function(){
+    clearInterval(display321);
+    startGame();
+  }, 4000);
 }
 
 var startTimer = function(){
@@ -56,4 +86,5 @@ var endGame = function(){
   gameIntroScreen.style.visibility = 'visible';
   inGameScreen.style.visibility = 'hidden';
   gameEndScreen.style.visibility = 'visible';
+  game321Screen.style.visibility = 'hidden';
 }
